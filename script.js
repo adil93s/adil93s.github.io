@@ -1,59 +1,63 @@
-let scrollAmount = 0;
-
+// Sélecteurs d'éléments
 const menuContainer = document.getElementById("menuContainer");
 const leftBtn = document.getElementById("leftBtn");
 const rightBtn = document.getElementById("rightBtn");
+const navOpen = document.getElementById("nav-open");
+const nav = document.getElementById("nav");
+const navClose = document.getElementsByClassName("nav-close");
+const fadeInElements = document.querySelectorAll(".fade");
 
-document.getElementById("nav-open").addEventListener("click", function () {
-    document.getElementById("nav").classList.toggle("opacity-0");
-    document.getElementById("nav").classList.toggle("-z-10");
-    document.getElementById("nav").classList.add("opacity-100");
-    document.getElementById("nav").classList.add("z-50");
-});
+let scrollAmount = 0;
 
-var navClose = document.getElementsByClassName("nav-close");
-
-Array.from(navClose).forEach(function (button) {
-    button.addEventListener("click", function () {
-        document.getElementById("nav").classList.toggle("opacity-100");
-        document.getElementById("nav").classList.toggle("z-50");
-        document.getElementById("nav").classList.add("opacity-0");
-        document.getElementById("nav").classList.add("-z-10");
+// Gestionnaires d'événements
+function addEventListeners() {
+    navOpen.addEventListener("click", toggleNav);
+    Array.from(navClose).forEach((button) => {
+        button.addEventListener("click", toggleNav);
     });
-});
+    leftBtn.addEventListener("click", scrollLeft);
+    rightBtn.addEventListener("click", scrollRight);
+    document.addEventListener("DOMContentLoaded", fadeInOnScroll);
+}
+
+// Fonctions
+function toggleNav() {
+    nav.classList.toggle("opacity-0");
+    nav.classList.toggle("-z-10");
+    nav.classList.toggle("opacity-100");
+    nav.classList.toggle("z-50");
+}
 
 function scrollLeft() {
-    console.log("test");
     const maxScrollLeft = 0;
     const desiredScrollLeft = scrollAmount - 352;
-
-    if (desiredScrollLeft < maxScrollLeft) {
-        scrollAmount = maxScrollLeft;
-    } else {
-        scrollAmount = desiredScrollLeft;
-    }
-
-    menuContainer.scrollTo({
-        left: scrollAmount,
-        behavior: "smooth",
-    });
+    scrollAmount = Math.max(desiredScrollLeft, maxScrollLeft);
+    menuContainer.scrollTo({ left: scrollAmount, behavior: "smooth" });
 }
 
 function scrollRight() {
     const maxScrollRight = menuContainer.scrollWidth - menuContainer.clientWidth;
     const desiredScrollRight = scrollAmount + 352;
+    scrollAmount = Math.min(desiredScrollRight, maxScrollRight);
+    menuContainer.scrollTo({ left: scrollAmount, behavior: "smooth" });
+}
 
-    if (desiredScrollRight > maxScrollRight) {
-        scrollAmount = maxScrollRight;
-    } else {
-        scrollAmount = desiredScrollRight;
-    }
+function fadeInOnScroll() {
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("fade-in");
+                observer.unobserve(entry.target);
+            });
+        },
+        { threshold: 0.5 }
+    );
 
-    menuContainer.scrollTo({
-        left: scrollAmount,
-        behavior: "smooth",
+    fadeInElements.forEach((el) => {
+        observer.observe(el);
     });
 }
 
-leftBtn.addEventListener("click", scrollLeft);
-rightBtn.addEventListener("click", scrollRight);
+// Initialisation
+addEventListeners();
