@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Adil Chetouani</title>
+        <link rel="stylesheet" href="assets/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.38/build/spline-viewer.js"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    borderWidth: {
+                        DEFAULT: "1px",
+                        0: "0",
+                        0.5: "0.5px",
+                        1: "1px",
+                        2: "2px",
+                        4: "4px",
+                        8: "8px",
+                    },
+                    colors: {
+                        // Base
+                        transparent: "transparent",
+                        white: "#FFFFFF",
+                        black: "#000000",
+
+                        // Custom
+                        primary: "#232E35",
+                        secondary: "#7E74F1",
+                        tertiary: "#EAE6FE",
+                        light: "#FBFBFB",
+                        "light-2": "#F5F5F5",
+                        "light-3": "#F1F1F1",
+                        grey: "#656D72",
+                    },
+                    container: {
+                        center: true,
+                        padding: {
+                            DEFAULT: "1rem",
+                            sm: "2rem",
+                            lg: "4rem",
+                            xl: "5rem",
+                            "2xl": "6rem",
+                        },
+                    },
+                    extend: {
+                        aspectRatio: {
+                            "4/3": "4/3",
+                        },
+                        boxShadow: {
+                            card: "0px 8px 16px 0px rgba(0, 0, 0, 0.03)",
+                        },
+                        lineHeight: {
+                            12: "3rem",
+                            13: "3.25rem",
+                            14: "3.5rem",
+                            16: "4rem",
+                            18: "4.5rem",
+                        },
+                        margin: {
+                            18: "4.5rem",
+                        },
+                        minWidth: {
+                            18: "18rem",
+                        },
+                        width: {
+                            120: "30rem",
+                        },
+                        fontSize: {
+                            xxs: "10px",
+                        },
+                    },
+                    screens: {
+                        xs: "390px",
+                        sm: "640px",
+                        md: "768px",
+                        lg: "1024px",
+                        xl: "1280px",
+                        "2xl": "1536px",
+                    },
+                },
+            };
+        </script>
+    </head>
+    <body>
+        <header>
+            <nav class="py-6 font-inter">
+                <div class="container mx-auto">
+                    <div class="flex flex-row justify-between items-center">
+                        <div class="flex gap-x-2 items-center select-none">
+                            <img class="w-8 h-fit" src="assets/logo.png" />
+                            <span class="text-xl text-primary font-semibold">Adil.</span>
+                        </div>
+                        <div class="lg:hidden">
+                            <svg id="nav-open" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 17H20M4 12H20M4 7H20" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="hidden lg:flex items-center">
+                            <ul class="flex list-none gap-x-4 lg:gap-x-8 text-base transition-all ease-in duration-300">
+                                <li class="flex text-base font-normal">
+                                    <a id="nav-button" href="#services" class="w-full px-5 py-2 text-primary hover:text-secondary transition duration-300">Services </a>
+                                </li>
+                                <li class="flex text-base font-normal">
+                                    <a id="nav-button" href="#works" class="w-full px-5 py-2 text-primary hover:text-secondary transition duration-300"> My Works </a>
+                                </li>
+                                <li class="flex text-base font-normal">
+                                    <a id="nav-button" href="#experience" class="w-full px-5 py-2 text-primary hover:text-secondary transition duration-300"> Experience </a>
+                                </li>
+                                <li class="flex text-base font-normal">
+                                    <a id="nav-button" href="#education" class="w-full px-5 py-2 text-primary hover:text-secondary transition duration-300"> Education </a>
+                                </li>
+                                <li class="flex lg:hidden text-base font-normal">
+                                    <a id="nav-button" href="resume.pdf" download class="w-full px-5 py-2 border-1 rounded-md border-light-2 text-primary hover:text-light hover:bg-secondary transition duration-300">
+                                        <span>Resume</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="opacity-0 fixed inset-0 bg-white z-50 transition-all duration-300" id="nav">
+                            <div class="relative container mx-auto py-6">
+                                <div class="flex flex-col items-end gap-y-12">
+                                    <button class="nav-close">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                    <ul class="flex flex-col p-4 text-end text-xl gap-y-4">
+                                        <li><a href="#services" class="nav-close py-2 text-primary hover:text-secondary">Services</a></li>
+                                        <li><a href="#works" class="nav-close py-2 text-primary hover:text-secondary">My Works</a></li>
+                                        <li><a href="#experience" class="nav-close py-2 text-primary hover:text-secondary">Experience</a></li>
+                                        <li><a href="#education" class="nav-close py-2 text-primary hover:text-secondary">Education</a></li>
+                                        <li><a href="resume.pdf" class="nav-close py-2 text-primary hover:text-secondary">Resume</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden lg:flex text-base font-normal">
+                            <a href="resume.pdf" download class="w-full px-5 py-2 border-1 rounded-md border-light-2 text-primary hover:text-light hover:bg-secondary transition duration-300">
+                                <span>Resume</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="flex flex-col min-h-screen">
+            <section class="container mx-auto">
+                <div class="flex flex-col-reverse md:flex-row items-center py-16 md:py-32 gap-y-12 gap-x-24">
+                    <div class="basis-1/2 flex flex-1 flex-col gap-8">
+                        <div class="flex flex-col gap-y-4">
+                            <span class="font-inter uppercase text-xs tracking-[.25em] text-grey">— my name is</span>
+                            <h1 class="text-3xl font-bold font-jakarta text-primary">Adil <span class="text-secondary">Chetouani.</span></h1>
+                        </div>
+                        <p class="text-base text-primary font-normal font-inter tracking-wide">Full-stack developer with experience in enterprise environments, specializing in web and mobile development. Proficient in Vue.js, Nuxt, NestJS, and Angular.</p>
+                        <div class="flex gap-x-4 items-center">
+                            <a href="https://github.com/adil93s">
+                                <svg class="fill-primary w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M10.0703 20.5029C10.0703 20.3563 10.038 20.2114 9.97578 20.0786C9.91353 19.9458 9.82284 19.8284 9.71014 19.7345C9.59743 19.6407 9.46546 19.5728 9.32359 19.5356C9.18171 19.4985 9.03341 19.493 8.88917 19.5195C7.58009 19.7598 5.92726 19.7959 5.4878 18.5615C5.10461 17.6055 4.46987 16.7711 3.65089 16.1465C3.59246 16.1148 3.53677 16.0782 3.48439 16.0372C3.41272 15.8481 3.2854 15.6852 3.11925 15.5699C2.95311 15.4547 2.75592 15.3925 2.55372 15.3916H2.54884C2.28444 15.3916 2.03077 15.4962 1.84335 15.6827C1.65594 15.8692 1.55004 16.1224 1.54884 16.3868C1.54493 17.2022 2.35984 17.7247 2.69044 17.9014C3.08029 18.2931 3.39359 18.7541 3.61427 19.2608C3.97853 20.2842 5.03712 21.837 8.08009 21.6368C8.08109 21.6719 8.08204 21.7051 8.08253 21.7354L8.08692 22.003C8.08692 22.2682 8.19228 22.5226 8.37982 22.7101C8.56735 22.8976 8.82171 23.003 9.08692 23.003C9.35214 23.003 9.60649 22.8976 9.79403 22.7101C9.98157 22.5226 10.0869 22.2682 10.0869 22.003L10.082 21.6846C10.0772 21.4951 10.0703 21.2207 10.0703 20.5029ZM20.7373 5.37694C20.7691 5.25194 20.8003 5.11327 20.8277 4.95702C20.9894 3.84261 20.8484 2.70521 20.4195 1.66402C20.3653 1.52828 20.2822 1.40603 20.1758 1.30582C20.0694 1.20562 19.9425 1.12989 19.8037 1.08395C19.4477 0.963828 18.1333 0.727498 15.6197 2.33395C13.5302 1.84224 11.3551 1.84224 9.26565 2.33395C6.76222 0.751028 5.4546 0.965828 5.10206 1.07911C4.95993 1.12319 4.82946 1.19851 4.72021 1.29957C4.61097 1.40062 4.52572 1.52483 4.47071 1.66311C4.03301 2.72429 3.89355 3.88488 4.06739 5.01955C4.09181 5.14748 4.11817 5.26565 4.14552 5.37404C3.31709 6.47748 2.87583 7.8234 2.89015 9.20314C2.88745 9.51097 2.90163 9.81873 2.93263 10.125C3.26663 14.7275 6.26663 16.1094 8.35694 16.584C8.31349 16.709 8.27394 16.8428 8.23878 16.9844C8.17612 17.2417 8.21805 17.5133 8.35538 17.7398C8.49271 17.9662 8.71422 18.1289 8.97135 18.1923C9.22848 18.2556 9.50024 18.2144 9.72703 18.0777C9.95382 17.941 10.1171 17.7199 10.1812 17.4629C10.2448 17.1297 10.4079 16.8236 10.6489 16.585C10.7947 16.4574 10.9002 16.2902 10.9527 16.1037C11.0052 15.9172 11.0023 15.7195 10.9445 15.5346C10.8866 15.3497 10.7763 15.1856 10.6269 15.0623C10.4775 14.9389 10.2955 14.8617 10.103 14.8399C6.64894 14.4453 5.14942 13.0381 4.92384 9.94143C4.89885 9.69616 4.88761 9.44968 4.89015 9.20315C4.87411 8.2198 5.19898 7.26123 5.80958 6.49026C5.87093 6.40988 5.93628 6.33263 6.00538 6.25881C6.12781 6.12181 6.21013 5.95373 6.2433 5.77301C6.27646 5.5923 6.25919 5.40594 6.19338 5.2344C6.12592 5.05393 6.07397 4.86803 6.03811 4.67873C5.95664 4.14044 5.98337 3.59132 6.11671 3.06349C6.98585 3.30896 7.80383 3.70853 8.53171 4.24317C8.65208 4.32334 8.78828 4.3767 8.93108 4.39961C9.07388 4.42253 9.21994 4.41447 9.35935 4.37599C11.3805 3.82749 13.5113 3.82783 15.5322 4.37699C15.6724 4.41543 15.8192 4.42303 15.9626 4.39926C16.106 4.37549 16.2425 4.32091 16.3628 4.2393C17.0872 3.70244 17.9018 3.2993 18.768 3.04887C18.9008 3.56402 18.9305 4.10032 18.8554 4.62699C18.8192 4.83453 18.7626 5.03799 18.6865 5.23442C18.6207 5.40596 18.6034 5.59232 18.6366 5.77303C18.6697 5.95375 18.7521 6.12183 18.8745 6.25883C18.9516 6.34574 19.0288 6.43949 19.0981 6.52738C19.7044 7.2853 20.0238 8.23285 20 9.20314C20.0018 9.46275 19.9893 9.72226 19.9624 9.98048C19.7422 13.0361 18.2368 14.4443 14.7666 14.8398C14.5741 14.8618 14.392 14.9392 14.2427 15.0626C14.0933 15.1861 13.983 15.3503 13.9253 15.5353C13.8675 15.7202 13.8647 15.918 13.9172 16.1046C13.9698 16.2911 14.0754 16.4583 14.2212 16.5859C14.4698 16.831 14.6333 17.1493 14.6875 17.4941C14.7551 17.7618 14.7861 18.0375 14.7798 18.3135V20.6475C14.77 21.2949 14.77 21.7803 14.77 22.0029C14.77 22.2682 14.8754 22.5225 15.0629 22.71C15.2504 22.8976 15.5048 23.0029 15.77 23.0029C16.0352 23.0029 16.2896 22.8976 16.4771 22.71C16.6647 22.5225 16.77 22.2682 16.77 22.0029C16.77 21.7861 16.77 21.3106 16.7798 20.6631V18.3135C16.7878 17.8713 16.7358 17.4301 16.625 17.002C16.5933 16.8614 16.5545 16.7226 16.5088 16.586C18.03 16.3332 19.4123 15.5489 20.4094 14.3726C21.4065 13.1962 21.9539 11.7042 21.9541 10.1621C21.987 9.84355 22.0024 9.5234 22 9.20314C22.0222 7.82191 21.5773 6.47366 20.7373 5.37696L20.7373 5.37694Z"
+                                    />
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/adilchetouani/">
+                                <svg class="fill-primary w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M17.5 8.99891C16.6047 8.99853 15.7233 9.21997 14.9345 9.64344C14.8626 9.45386 14.7346 9.29068 14.5677 9.17555C14.4008 9.06043 14.2027 8.99882 14 8.99891H9.99997C9.86863 8.99883 9.73856 9.02465 9.6172 9.07488C9.49584 9.1251 9.38557 9.19876 9.2927 9.29164C9.19982 9.38451 9.12617 9.49478 9.07594 9.61614C9.02571 9.7375 8.9999 9.86757 8.99997 9.99891V21.9989C8.99989 22.1303 9.02571 22.2603 9.07594 22.3817C9.12616 22.503 9.19982 22.6133 9.29269 22.7062C9.38557 22.7991 9.49584 22.8727 9.6172 22.9229C9.73856 22.9732 9.86863 22.999 9.99997 22.9989H14C14.1313 22.999 14.2614 22.9732 14.3827 22.9229C14.5041 22.8727 14.6144 22.7991 14.7072 22.7062C14.8001 22.6133 14.8738 22.503 14.924 22.3817C14.9742 22.2603 15 22.1303 15 21.9989V16.4989C15 16.2337 15.1053 15.9793 15.2929 15.7918C15.4804 15.6043 15.7348 15.4989 16 15.4989C16.2652 15.4989 16.5195 15.6043 16.7071 15.7918C16.8946 15.9793 17 16.2337 17 16.4989V21.9989C16.9999 22.1303 17.0257 22.2603 17.0759 22.3817C17.1262 22.503 17.1998 22.6133 17.2927 22.7062C17.3856 22.7991 17.4958 22.8727 17.6172 22.9229C17.7386 22.9732 17.8686 22.999 18 22.9989H22C22.1313 22.999 22.2614 22.9732 22.3827 22.9229C22.5041 22.8727 22.6144 22.7991 22.7072 22.7062C22.8001 22.6133 22.8738 22.503 22.924 22.3817C22.9742 22.2603 23 22.1303 23 21.9989V14.4989C22.9982 13.0408 22.4181 11.6429 21.3871 10.6118C20.356 9.58077 18.9581 9.00072 17.5 8.99891ZM21 20.9989H19V16.4989C19 15.7033 18.6839 14.9402 18.1213 14.3776C17.5587 13.815 16.7956 13.4989 16 13.4989C15.2043 13.4989 14.4413 13.815 13.8786 14.3776C13.316 14.9402 13 15.7033 13 16.4989V20.9989H11V10.9989H13V11.702C13.0001 11.9092 13.0645 12.1113 13.1844 12.2803C13.3043 12.4493 13.4737 12.5769 13.6692 12.6455C13.8647 12.7141 14.0767 12.7203 14.2759 12.6633C14.4751 12.6062 14.6517 12.4887 14.7812 12.327C15.23 11.7571 15.8456 11.3415 16.542 11.1383C17.2384 10.9351 17.9808 10.9544 18.6657 11.1936C19.3506 11.4328 19.9436 11.8799 20.3621 12.4725C20.7806 13.065 21.0036 13.7735 21 14.4989V20.9989ZM6.99997 8.99891H2.99997C2.86863 8.99883 2.73856 9.02465 2.6172 9.07488C2.49584 9.1251 2.38557 9.19876 2.2927 9.29164C2.19982 9.38451 2.12617 9.49478 2.07594 9.61614C2.02571 9.7375 1.9999 9.86757 1.99997 9.99891V21.9989C1.99989 22.1303 2.02571 22.2603 2.07594 22.3817C2.12616 22.503 2.19982 22.6133 2.29269 22.7062C2.38557 22.7991 2.49584 22.8727 2.6172 22.9229C2.73856 22.9732 2.86863 22.999 2.99997 22.9989H6.99997C7.13131 22.999 7.26138 22.9732 7.38274 22.9229C7.5041 22.8727 7.61437 22.7991 7.70725 22.7062C7.80012 22.6133 7.87378 22.503 7.92401 22.3817C7.97423 22.2603 8.00005 22.1303 7.99997 21.9989V9.99891C8.00005 9.86757 7.97423 9.7375 7.924 9.61614C7.87378 9.49478 7.80012 9.38451 7.70724 9.29164C7.61437 9.19876 7.5041 9.1251 7.38274 9.07488C7.26138 9.02465 7.13131 8.99883 6.99997 8.99891ZM5.99997 20.9989H3.99997V10.9989H5.99997V20.9989ZM5.01462 1.54191C4.57698 1.51571 4.13859 1.57881 3.7261 1.72735C3.31361 1.8759 2.93564 2.1068 2.61519 2.406C2.29473 2.70521 2.03849 3.06646 1.86203 3.46781C1.68557 3.86915 1.59259 4.3022 1.58875 4.7406C1.5849 5.17901 1.67027 5.61361 1.83966 6.01799C2.00904 6.42237 2.25891 6.78807 2.57407 7.09285C2.88922 7.39763 3.26308 7.63512 3.6729 7.79089C4.08272 7.94665 4.51994 8.01742 4.95797 7.99891H4.98629C5.42509 8.02497 5.86459 7.96129 6.27795 7.81176C6.6913 7.66223 7.06983 7.42998 7.39039 7.12922C7.71096 6.82845 7.96683 6.46548 8.14238 6.06249C8.31793 5.65949 8.40946 5.22494 8.41139 4.78537C8.41332 4.3458 8.3256 3.91046 8.15359 3.50594C7.98159 3.10142 7.7289 2.73622 7.41099 2.43266C7.09307 2.12909 6.7166 1.89353 6.30457 1.74038C5.89255 1.58723 5.45362 1.5197 5.01461 1.54191H5.01462ZM4.9863 5.99891H4.95797C4.78504 6.01991 4.60961 6.00369 4.44346 5.95134C4.27731 5.89899 4.12427 5.81171 3.99461 5.69537C3.86495 5.57903 3.76167 5.43631 3.69168 5.27678C3.6217 5.11726 3.58664 4.94461 3.58884 4.77042C3.58884 4.02432 4.14841 3.5419 5.01462 3.5419C5.18932 3.51861 5.36698 3.53303 5.53564 3.58418C5.70429 3.63534 5.86003 3.72204 5.99236 3.83845C6.12468 3.95486 6.23053 4.09828 6.30276 4.25904C6.37499 4.4198 6.41193 4.59418 6.4111 4.77042C6.4111 5.51651 5.85153 5.99891 4.9863 5.99891Z"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="basis-1/2 flex flex-1 w-full">
+                        <spline-viewer class="w-full h-full" loading-anim-type="none" url="https://prod.spline.design/VSkz5Rjs2arYq5kT/scene.splinecode"></spline-viewer>
+                    </div>
+                </div>
+            </section>
+            <section id="services" class="bg-light">
+                <div class="container mx-auto">
+                    <div class="flex flex-col items-center py-16 md:py-32 gap-8">
+                        <div class="flex flex-col items-center gap-y-4">
+                            <span class="font-inter uppercase text-xs tracking-[.25em] text-grey">— services</span>
+                            <h2 class="text-3xl font-bold font-jakarta text-primary">Specialized in</h2>
+                        </div>
+                        <div class="flex flex-col lg:flex-row gap-8">
+                            <div class="flex flex-col p-12 gap-y-4 bg-white text-primary items-center justify-center">
+                                <svg class="w-12 h-12" viewBox="0 0 57 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0.5" width="56" height="56" rx="16" fill="#F5F3FE" />
+                                    <path d="M20.5 35H36.5M20.5 21V32H36.5V21L32.5 25L28.5 21L24.5 25L20.5 21Z" stroke="#7E74F1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <span class="font-jakarta text-base text-center font-semibold"> UI/UX Design </span>
+                                <span class="font-inter text-sm text-center font-normal"> Turn what you have in mind of a digital product into reality. For any platform you consider. </span>
+                            </div>
+                            <div class="flex flex-col p-12 gap-y-4 bg-white text-primary items-center justify-center">
+                                <svg class="w-12 h-12" viewBox="0 0 57 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0.5" width="56" height="56" rx="16" fill="#F5F3FE" />
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M30.0878 19.2517C29.4368 18.9197 28.5546 18.9146 27.8984 19.2457C25.6048 20.7373 23.1796 22.1591 21.1023 23.5848C20.7931 23.8344 20.5737 24.1971 20.5775 24.6241C20.5812 25.0493 20.8051 25.4072 21.1124 25.6527C23.1796 26.8985 25.6048 28.3204 27.8477 29.9529C28.4987 30.2849 29.3809 30.29 30.0371 29.9588C32.3952 28.3204 33.3653 27.8464 36.8332 25.6198C37.1424 25.3702 37.3618 25.0074 37.3581 24.5805C37.3543 24.1552 37.1305 23.7973 36.8232 23.5518C34.8204 22.1591 32.3952 20.7373 30.0878 19.2517ZM28.5661 20.509C28.7986 20.3917 29.1805 20.3928 29.4146 20.5122C31.4252 21.6851 33.3653 23.107 35.8238 24.5902C33.8503 25.9506 31.9102 27.3725 29.3694 28.6955C29.1369 28.8129 28.755 28.8118 28.521 28.6924C26.202 27.3725 24.1497 25.9506 22.1117 24.6144C24.1497 23.107 25.6048 22.1591 28.5661 20.509Z"
+                                        fill="#7E74F1"
+                                    />
+                                    <path
+                                        d="M37.8895 28.1029C38.1023 28.4359 37.9985 28.8745 37.6577 29.0824L31.7332 32.6966C30.9401 33.0598 29.9642 33.5337 29 33.5338C28.0358 33.5338 27.0599 33.0598 26.202 32.6969L20.3424 29.1236C20.0016 28.9157 19.8977 28.4772 20.1104 28.1441C20.3232 27.811 20.772 27.7095 21.1128 27.9174L26.9724 31.4907C27.5002 31.8126 28.2497 32.112 29 32.1119C29.7503 32.1119 30.4349 31.8125 30.9626 31.4905L36.8871 27.8763C37.2279 27.6684 37.6767 27.7698 37.8895 28.1029Z"
+                                        fill="#7E74F1"
+                                    />
+                                    <path
+                                        d="M37.8895 31.6619C38.1023 31.9949 37.9985 32.4334 37.6577 32.6414L32.5271 35.7722C30.9401 36.531 30.2178 36.9999 28.9676 37C27.7175 37.0001 26.0898 36.057 25.4079 35.7726L20.3424 32.6826C20.0015 32.4747 19.8977 32.0362 20.1105 31.7031C20.3233 31.3701 20.7721 31.2686 21.1129 31.4765L26.1785 34.5665C26.9284 35.0239 27.9314 35.4296 28.9676 35.4295C30.0039 35.4295 31.0067 35.0237 31.7564 34.5662L36.887 31.4354C37.2278 31.2275 37.6766 31.3288 37.8895 31.6619Z"
+                                        fill="#7E74F1"
+                                    />
+                                </svg>
+                                <span class="font-jakarta text-base text-center font-semibold"> Mobile Development </span>
+                                <span class="font-inter text-sm text-center font-normal"> Standard designing, building, and implementing your applications with documentation. </span>
+                            </div>
+                            <div class="flex flex-col p-12 gap-y-4 bg-white text-primary items-center justify-center">
+                                <svg class="w-12 h-12" viewBox="0 0 57 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0.5" width="56" height="56" rx="16" fill="#F5F3FE" />
+                                    <path d="M37.5 28C37.5 32.9706 33.4706 37 28.5 37M37.5 28C37.5 23.0294 33.4706 19 28.5 19M37.5 28H19.5M28.5 37C23.5294 37 19.5 32.9706 19.5 28M28.5 37C28.5 37 32.5 34 32.5 28C32.5 22 28.5 19 28.5 19M28.5 37C28.5 37 24.5 34 24.5 28C24.5 22 28.5 19 28.5 19M19.5 28C19.5 23.0294 23.5294 19 28.5 19" stroke="#7E74F1" stroke-width="1.5" />
+                                </svg>
+                                <span class="font-jakarta text-base text-center font-semibold"> Web Development </span>
+                                <span class="font-inter text-sm text-center font-normal"> Create and maintain your websites and also take care of its performance and traffic capacity. </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="works" class="container mx-auto">
+                <div class="flex flex-col py-16 md:py-32 gap-8">
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col gap-y-4">
+                            <span class="font-inter uppercase text-xs tracking-[.25em] text-grey">— my works</span>
+                            <h2 class="text-3xl font-bold font-jakarta text-primary">Featured Portfolios</h2>
+                        </div>
+                        <div class="flex gap-x-4">
+                            <div id="leftBtn" class="cursor-pointer">
+                                <svg class="w-10 h-10 bg-tertiary rounded-full opacity-40 hover:opacity-80 transition duration-300" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 15L17 20L22 25" stroke="#7E74F1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div id="rightBtn" class="cursor-pointer">
+                                <svg class="w-10 h-10 bg-tertiary rounded-full opacity-40 hover:opacity-80 transition duration-300" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 25L23 20L18 15" stroke="#7E74F1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="menuContainer" class="flex overflow-x-scroll scrollbar-hide max-w-full text-primary">
+                        <div class="flex flex-nowrap gap-x-8">
+                            <div class="flex flex-col bg-white rounded w-80">
+                                <div class="bg-black relative rounded-t-lg w-full h-40">
+                                    <img src="assets/ent.png" class="absolute rounded-t-lg inset-0 w-full h-full object-cover opacity-90 select-none" />
+                                </div>
+                                <div class="flex flex-col p-8 gap-y-4 border-1 border-light-2 rounded-b-lg">
+                                    <span class="font-jakarta font-medium">ENT · Webapp</span>
+                                    <div class="flex flex-wrap gap-x-4 items-center text-grey text-xs font-inter">
+                                        <div class="px-2 py-1 rounded border-1 border-light-2">Angular</div>
+                                        <div class="px-2 py-1 rounded border-1 border-light-2">Tailwind</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col bg-white rounded w-80">
+                                <div class="bg-black relative rounded-t-lg w-full h-40">
+                                    <img src="assets/tomappart-website.png" class="absolute rounded-t-lg inset-0 w-full h-full object-cover opacity-90 select-none" />
+                                </div>
+                                <div class="flex flex-col p-8 gap-y-4 border-1 border-light-2 rounded-b-lg">
+                                    <span class="font-jakarta font-medium">Tomappart · Website</span>
+                                    <div class="flex flex-wrap gap-x-4 items-center text-grey text-xs font-inter">
+                                        <div class="px-2 py-1 rounded border-1 border-light-2">Nuxt</div>
+                                        <div class="px-2 py-1 rounded border-1 border-light-2">Tailwind</div>
+                                        <a href="https://tomappart.fr">
+                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                                                <path d="M15 16H17C19.2091 16 21 14.2091 21 12C21 9.79086 19.2091 8 17 8H15M8 12H16M9 8H7C4.79086 8 3 9.79086 3 12C3 14.2091 4.79086 16 7 16H9" stroke="#656D72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col bg-white rounded w-80">
+                                <div class="bg-black relative rounded-t-lg w-full h-40">
+                                    <img src="assets/tomappart-app.png" class="absolute rounded-t-lg inset-0 w-full h-full object-cover opacity-90 select-none" />
+                                </div>
+                                <div class="flex flex-col p-8 gap-y-4 border-1 border-light-2 rounded-b-lg">
+                                    <span class="font-jakarta font-medium">Tomappart · Webapp</span>
+                                    <div class="flex flex-wrap gap-x-4 items-center text-grey text-xs font-inter">
+                                        <div class="px-2 py-1 rounded border-1 border-light-2">VueJs</div>
+                                        <div class="px-2 py-1 rounded border-1 border-light-2">Tailwind</div>
+                                        <a href="https://app.tomappart.fr">
+                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                                                <path d="M15 16H17C19.2091 16 21 14.2091 21 12C21 9.79086 19.2091 8 17 8H15M8 12H16M9 8H7C4.79086 8 3 9.79086 3 12C3 14.2091 4.79086 16 7 16H9" stroke="#656D72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col bg-white rounded w-80">
+                                <div class="bg-black relative rounded-t-lg w-full h-40">
+                                    <img src="assets/ma-quittance.png" class="absolute rounded-t-lg inset-0 w-full h-full object-cover opacity-90 select-none" />
+                                </div>
+                                <div class="flex flex-col p-8 gap-y-4 border-1 border-light-2 rounded-b-lg">
+                                    <span class="font-jakarta font-medium">MaQuittance · Mobile App</span>
+                                    <div class="flex flex-wrap gap-x-4 items-center text-grey text-xs font-inter">
+                                        <div class="px-2 py-1 rounded border-1 border-light-2">Flutter</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="experience" class="bg-light">
+                <div class="container mx-auto">
+                    <div class="flex flex-col md:flex-row py-16 md:py-32 gap-y-8 gap-x-20">
+                        <div class="flex flex-col gap-y-4">
+                            <span class="font-inter uppercase text-xs tracking-[.25em] text-grey">— career path</span>
+                            <h2 class="text-3xl font-bold font-jakarta text-primary">Work Experices</h2>
+                        </div>
+                        <div class="flex flex-col gap-y-4">
+                            <span class="text-primary text-base font-jakarta">Full-stack Developer <span class="underline">Tomappart</span></span>
+                            <span class="text-grey font-inter text-sm">Paris, France </span>
+                            <span class="text-grey font-inter text-sm font-medium">Sep 2023 - Aug 2024 · Apprenticeship </span>
+                            <div class="flex flex-wrap gap-x-4 items-center text-grey text-xs font-inter">
+                                <div class="px-2 py-1 rounded border-1 border-light-2">Nuxt</div>
+                                <div class="px-2 py-1 rounded border-1 border-light-2">VueJs</div>
+                                <div class="px-2 py-1 rounded border-1 border-light-2">NestJS</div>
+                                <div class="px-2 py-1 rounded border-1 border-light-2">Flutter</div>
+                                <div class="px-2 py-1 rounded border-1 border-light-2">Tailwind</div>
+                            </div>
+                            <div class="w-full h-0.5 bg-light-3"></div>
+                            <p class="font-inter text-grey">
+                                - Creating new web and mobile applications. <br />
+                                - Improve existing applications, elevating usability and functionality, and ensure a smoother user experience
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="education" class="container mx-auto">
+                <div class="flex flex-col py-16 md:py-32 gap-8">
+                    <div class="flex flex-col gap-y-4">
+                        <span class="font-inter uppercase text-xs tracking-[.25em] text-grey">— learning path</span>
+                        <h2 class="text-3xl font-bold font-jakarta text-primary">Education & Skills</h2>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-y-8 gap-x-12">
+                        <div class="flex flex-col gap-y-2 text-grey font-inter">
+                            <div class="flex gap-x-4">
+                                <div class="relative flex flex-col items-center mt-1">
+                                    <div class="flex w-3 h-3 bg-light-3 rounded-full"></div>
+                                    <div class="absolute flex w-0.5 bg-light-3 h-full mt-3"></div>
+                                </div>
+                                <div class="flex flex-col gap-y-2 mb-8">
+                                    <span class="text-sm font-medium">Soon...</span>
+                                    <span class="text-xs">...</span>
+                                    <span class="text-xs font-medium">2024 - 2026</span>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-x-4">
+                                <div class="relative flex flex-col items-center mt-1">
+                                    <div class="flex w-3 h-3 bg-light-3 rounded-full"></div>
+                                    <div class="absolute flex w-0.5 bg-light-3 h-full mt-3"></div>
+                                </div>
+                                <div class="flex flex-col gap-y-2 mb-8">
+                                    <span class="text-sm font-medium">IUT de Montreuil · Université de Paris 8</span>
+                                    <span class="text-xs">BUT - Informatique</span>
+                                    <span class="text-xs font-medium">2021 - 2024</span>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-x-4">
+                                <div class="flex w-3 h-3 bg-light-3 rounded-full mt-1"></div>
+                                <div class="flex flex-col gap-y-2 mb-8">
+                                    <span class="text-sm font-medium">Lycée Charles De Gaulle · Longperrier</span>
+                                    <span class="text-xs">Baccalauréat - Numérique et sciences de l'informatiques, Mathématiques</span>
+                                    <span class="text-xs font-medium">2021</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-y-8 font-inter">
+                            <span class="text-sm text-grey">For 3+ years, I have been continuously learning in the field of development and experimenting with new technologies and frameworks, and here you can see a summary of my skills :</span>
+                            <div class="pl-8 grid grid-cols-2 font-medium text-base text-secondary w-fit gap-x-24">
+                                <span>> <span class="text-primary">Nuxt</span></span>
+                                <span>> <span class="text-primary">VueJs</span></span>
+                                <span>> <span class="text-primary">NestJS</span></span>
+                                <span>> <span class="text-primary">Angular</span></span>
+                                <span>> <span class="text-primary">Tailwind</span></span>
+                                <span>> <span class="text-primary">Flutter</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer class="py-16">
+            <div class="container mx-auto">
+                <div class="flex flex-col gap-y-4 items-center justify-center">
+                    <div class="flex gap-x-4 items-center">
+                        <a href="https://github.com/adil93s">
+                            <svg class="fill-primary w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M10.0703 20.5029C10.0703 20.3563 10.038 20.2114 9.97578 20.0786C9.91353 19.9458 9.82284 19.8284 9.71014 19.7345C9.59743 19.6407 9.46546 19.5728 9.32359 19.5356C9.18171 19.4985 9.03341 19.493 8.88917 19.5195C7.58009 19.7598 5.92726 19.7959 5.4878 18.5615C5.10461 17.6055 4.46987 16.7711 3.65089 16.1465C3.59246 16.1148 3.53677 16.0782 3.48439 16.0372C3.41272 15.8481 3.2854 15.6852 3.11925 15.5699C2.95311 15.4547 2.75592 15.3925 2.55372 15.3916H2.54884C2.28444 15.3916 2.03077 15.4962 1.84335 15.6827C1.65594 15.8692 1.55004 16.1224 1.54884 16.3868C1.54493 17.2022 2.35984 17.7247 2.69044 17.9014C3.08029 18.2931 3.39359 18.7541 3.61427 19.2608C3.97853 20.2842 5.03712 21.837 8.08009 21.6368C8.08109 21.6719 8.08204 21.7051 8.08253 21.7354L8.08692 22.003C8.08692 22.2682 8.19228 22.5226 8.37982 22.7101C8.56735 22.8976 8.82171 23.003 9.08692 23.003C9.35214 23.003 9.60649 22.8976 9.79403 22.7101C9.98157 22.5226 10.0869 22.2682 10.0869 22.003L10.082 21.6846C10.0772 21.4951 10.0703 21.2207 10.0703 20.5029ZM20.7373 5.37694C20.7691 5.25194 20.8003 5.11327 20.8277 4.95702C20.9894 3.84261 20.8484 2.70521 20.4195 1.66402C20.3653 1.52828 20.2822 1.40603 20.1758 1.30582C20.0694 1.20562 19.9425 1.12989 19.8037 1.08395C19.4477 0.963828 18.1333 0.727498 15.6197 2.33395C13.5302 1.84224 11.3551 1.84224 9.26565 2.33395C6.76222 0.751028 5.4546 0.965828 5.10206 1.07911C4.95993 1.12319 4.82946 1.19851 4.72021 1.29957C4.61097 1.40062 4.52572 1.52483 4.47071 1.66311C4.03301 2.72429 3.89355 3.88488 4.06739 5.01955C4.09181 5.14748 4.11817 5.26565 4.14552 5.37404C3.31709 6.47748 2.87583 7.8234 2.89015 9.20314C2.88745 9.51097 2.90163 9.81873 2.93263 10.125C3.26663 14.7275 6.26663 16.1094 8.35694 16.584C8.31349 16.709 8.27394 16.8428 8.23878 16.9844C8.17612 17.2417 8.21805 17.5133 8.35538 17.7398C8.49271 17.9662 8.71422 18.1289 8.97135 18.1923C9.22848 18.2556 9.50024 18.2144 9.72703 18.0777C9.95382 17.941 10.1171 17.7199 10.1812 17.4629C10.2448 17.1297 10.4079 16.8236 10.6489 16.585C10.7947 16.4574 10.9002 16.2902 10.9527 16.1037C11.0052 15.9172 11.0023 15.7195 10.9445 15.5346C10.8866 15.3497 10.7763 15.1856 10.6269 15.0623C10.4775 14.9389 10.2955 14.8617 10.103 14.8399C6.64894 14.4453 5.14942 13.0381 4.92384 9.94143C4.89885 9.69616 4.88761 9.44968 4.89015 9.20315C4.87411 8.2198 5.19898 7.26123 5.80958 6.49026C5.87093 6.40988 5.93628 6.33263 6.00538 6.25881C6.12781 6.12181 6.21013 5.95373 6.2433 5.77301C6.27646 5.5923 6.25919 5.40594 6.19338 5.2344C6.12592 5.05393 6.07397 4.86803 6.03811 4.67873C5.95664 4.14044 5.98337 3.59132 6.11671 3.06349C6.98585 3.30896 7.80383 3.70853 8.53171 4.24317C8.65208 4.32334 8.78828 4.3767 8.93108 4.39961C9.07388 4.42253 9.21994 4.41447 9.35935 4.37599C11.3805 3.82749 13.5113 3.82783 15.5322 4.37699C15.6724 4.41543 15.8192 4.42303 15.9626 4.39926C16.106 4.37549 16.2425 4.32091 16.3628 4.2393C17.0872 3.70244 17.9018 3.2993 18.768 3.04887C18.9008 3.56402 18.9305 4.10032 18.8554 4.62699C18.8192 4.83453 18.7626 5.03799 18.6865 5.23442C18.6207 5.40596 18.6034 5.59232 18.6366 5.77303C18.6697 5.95375 18.7521 6.12183 18.8745 6.25883C18.9516 6.34574 19.0288 6.43949 19.0981 6.52738C19.7044 7.2853 20.0238 8.23285 20 9.20314C20.0018 9.46275 19.9893 9.72226 19.9624 9.98048C19.7422 13.0361 18.2368 14.4443 14.7666 14.8398C14.5741 14.8618 14.392 14.9392 14.2427 15.0626C14.0933 15.1861 13.983 15.3503 13.9253 15.5353C13.8675 15.7202 13.8647 15.918 13.9172 16.1046C13.9698 16.2911 14.0754 16.4583 14.2212 16.5859C14.4698 16.831 14.6333 17.1493 14.6875 17.4941C14.7551 17.7618 14.7861 18.0375 14.7798 18.3135V20.6475C14.77 21.2949 14.77 21.7803 14.77 22.0029C14.77 22.2682 14.8754 22.5225 15.0629 22.71C15.2504 22.8976 15.5048 23.0029 15.77 23.0029C16.0352 23.0029 16.2896 22.8976 16.4771 22.71C16.6647 22.5225 16.77 22.2682 16.77 22.0029C16.77 21.7861 16.77 21.3106 16.7798 20.6631V18.3135C16.7878 17.8713 16.7358 17.4301 16.625 17.002C16.5933 16.8614 16.5545 16.7226 16.5088 16.586C18.03 16.3332 19.4123 15.5489 20.4094 14.3726C21.4065 13.1962 21.9539 11.7042 21.9541 10.1621C21.987 9.84355 22.0024 9.5234 22 9.20314C22.0222 7.82191 21.5773 6.47366 20.7373 5.37696L20.7373 5.37694Z"
+                                />
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/adilchetouani/">
+                            <svg class="fill-primary w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M17.5 8.99891C16.6047 8.99853 15.7233 9.21997 14.9345 9.64344C14.8626 9.45386 14.7346 9.29068 14.5677 9.17555C14.4008 9.06043 14.2027 8.99882 14 8.99891H9.99997C9.86863 8.99883 9.73856 9.02465 9.6172 9.07488C9.49584 9.1251 9.38557 9.19876 9.2927 9.29164C9.19982 9.38451 9.12617 9.49478 9.07594 9.61614C9.02571 9.7375 8.9999 9.86757 8.99997 9.99891V21.9989C8.99989 22.1303 9.02571 22.2603 9.07594 22.3817C9.12616 22.503 9.19982 22.6133 9.29269 22.7062C9.38557 22.7991 9.49584 22.8727 9.6172 22.9229C9.73856 22.9732 9.86863 22.999 9.99997 22.9989H14C14.1313 22.999 14.2614 22.9732 14.3827 22.9229C14.5041 22.8727 14.6144 22.7991 14.7072 22.7062C14.8001 22.6133 14.8738 22.503 14.924 22.3817C14.9742 22.2603 15 22.1303 15 21.9989V16.4989C15 16.2337 15.1053 15.9793 15.2929 15.7918C15.4804 15.6043 15.7348 15.4989 16 15.4989C16.2652 15.4989 16.5195 15.6043 16.7071 15.7918C16.8946 15.9793 17 16.2337 17 16.4989V21.9989C16.9999 22.1303 17.0257 22.2603 17.0759 22.3817C17.1262 22.503 17.1998 22.6133 17.2927 22.7062C17.3856 22.7991 17.4958 22.8727 17.6172 22.9229C17.7386 22.9732 17.8686 22.999 18 22.9989H22C22.1313 22.999 22.2614 22.9732 22.3827 22.9229C22.5041 22.8727 22.6144 22.7991 22.7072 22.7062C22.8001 22.6133 22.8738 22.503 22.924 22.3817C22.9742 22.2603 23 22.1303 23 21.9989V14.4989C22.9982 13.0408 22.4181 11.6429 21.3871 10.6118C20.356 9.58077 18.9581 9.00072 17.5 8.99891ZM21 20.9989H19V16.4989C19 15.7033 18.6839 14.9402 18.1213 14.3776C17.5587 13.815 16.7956 13.4989 16 13.4989C15.2043 13.4989 14.4413 13.815 13.8786 14.3776C13.316 14.9402 13 15.7033 13 16.4989V20.9989H11V10.9989H13V11.702C13.0001 11.9092 13.0645 12.1113 13.1844 12.2803C13.3043 12.4493 13.4737 12.5769 13.6692 12.6455C13.8647 12.7141 14.0767 12.7203 14.2759 12.6633C14.4751 12.6062 14.6517 12.4887 14.7812 12.327C15.23 11.7571 15.8456 11.3415 16.542 11.1383C17.2384 10.9351 17.9808 10.9544 18.6657 11.1936C19.3506 11.4328 19.9436 11.8799 20.3621 12.4725C20.7806 13.065 21.0036 13.7735 21 14.4989V20.9989ZM6.99997 8.99891H2.99997C2.86863 8.99883 2.73856 9.02465 2.6172 9.07488C2.49584 9.1251 2.38557 9.19876 2.2927 9.29164C2.19982 9.38451 2.12617 9.49478 2.07594 9.61614C2.02571 9.7375 1.9999 9.86757 1.99997 9.99891V21.9989C1.99989 22.1303 2.02571 22.2603 2.07594 22.3817C2.12616 22.503 2.19982 22.6133 2.29269 22.7062C2.38557 22.7991 2.49584 22.8727 2.6172 22.9229C2.73856 22.9732 2.86863 22.999 2.99997 22.9989H6.99997C7.13131 22.999 7.26138 22.9732 7.38274 22.9229C7.5041 22.8727 7.61437 22.7991 7.70725 22.7062C7.80012 22.6133 7.87378 22.503 7.92401 22.3817C7.97423 22.2603 8.00005 22.1303 7.99997 21.9989V9.99891C8.00005 9.86757 7.97423 9.7375 7.924 9.61614C7.87378 9.49478 7.80012 9.38451 7.70724 9.29164C7.61437 9.19876 7.5041 9.1251 7.38274 9.07488C7.26138 9.02465 7.13131 8.99883 6.99997 8.99891ZM5.99997 20.9989H3.99997V10.9989H5.99997V20.9989ZM5.01462 1.54191C4.57698 1.51571 4.13859 1.57881 3.7261 1.72735C3.31361 1.8759 2.93564 2.1068 2.61519 2.406C2.29473 2.70521 2.03849 3.06646 1.86203 3.46781C1.68557 3.86915 1.59259 4.3022 1.58875 4.7406C1.5849 5.17901 1.67027 5.61361 1.83966 6.01799C2.00904 6.42237 2.25891 6.78807 2.57407 7.09285C2.88922 7.39763 3.26308 7.63512 3.6729 7.79089C4.08272 7.94665 4.51994 8.01742 4.95797 7.99891H4.98629C5.42509 8.02497 5.86459 7.96129 6.27795 7.81176C6.6913 7.66223 7.06983 7.42998 7.39039 7.12922C7.71096 6.82845 7.96683 6.46548 8.14238 6.06249C8.31793 5.65949 8.40946 5.22494 8.41139 4.78537C8.41332 4.3458 8.3256 3.91046 8.15359 3.50594C7.98159 3.10142 7.7289 2.73622 7.41099 2.43266C7.09307 2.12909 6.7166 1.89353 6.30457 1.74038C5.89255 1.58723 5.45362 1.5197 5.01461 1.54191H5.01462ZM4.9863 5.99891H4.95797C4.78504 6.01991 4.60961 6.00369 4.44346 5.95134C4.27731 5.89899 4.12427 5.81171 3.99461 5.69537C3.86495 5.57903 3.76167 5.43631 3.69168 5.27678C3.6217 5.11726 3.58664 4.94461 3.58884 4.77042C3.58884 4.02432 4.14841 3.5419 5.01462 3.5419C5.18932 3.51861 5.36698 3.53303 5.53564 3.58418C5.70429 3.63534 5.86003 3.72204 5.99236 3.83845C6.12468 3.95486 6.23053 4.09828 6.30276 4.25904C6.37499 4.4198 6.41193 4.59418 6.4111 4.77042C6.4111 5.51651 5.85153 5.99891 4.9863 5.99891Z"
+                                />
+                            </svg>
+                        </a>
+                    </div>
+                    <div>
+                        <span class="font-sm text-grey font-inter">© 2024 - Adil Chetouani</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

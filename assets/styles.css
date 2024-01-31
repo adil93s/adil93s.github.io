@@ -1,0 +1,15 @@
+.font-jakarta {
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.font-inter {
+    font-family: "Inter", sans-serif;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
