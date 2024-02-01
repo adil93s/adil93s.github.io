@@ -35,6 +35,9 @@ function toggleNav() {
     navMobile.classList.toggle("-z-10");
     navMobile.classList.toggle("opacity-100");
     navMobile.classList.toggle("z-50");
+    navMobile.classList.toggle("h-full");
+    navMobile.classList.toggle("fixed");
+    navMobile.classList.toggle("absolute");
     navMobileContent.classList.toggle("hidden");
     navMobileContent.classList.toggle("relative");
     navMobileOpenned = !navMobileOpenned;
