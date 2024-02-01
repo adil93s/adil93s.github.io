@@ -30,7 +30,6 @@ function addEventListeners() {
 // Fonctions
 function toggleNav() {
     const isOpen = navMobile.classList.contains("opacity-100");
-    header.classList.toggle("backdrop-blur-sm", !isOpen);
     header.classList.toggle("h-full", !isOpen);
     navMobile.classList.toggle("opacity-0");
     navMobile.classList.toggle("-z-10");
@@ -39,6 +38,7 @@ function toggleNav() {
     navMobileContent.classList.toggle("hidden");
     navMobileContent.classList.toggle("relative");
     navMobileOpenned = !navMobileOpenned;
+    void header.offsetHeight;
 }
 
 function displayHeader() {
@@ -47,15 +47,16 @@ function displayHeader() {
 
         if (currentScroll > lastScrollTop && currentScroll > hideThreshold) {
             header.classList.add("opacity-0", "z-10");
-            header.classList.remove("opacity-100", "z-20", "backdrop-blur-sm");
+            header.classList.remove("opacity-100", "z-20");
             header.style.pointerEvents = "none";
         } else if (currentScroll < lastScrollTop || currentScroll <= hideThreshold) {
-            header.classList.add("opacity-100", "z-20", "backdrop-blur-sm");
+            header.classList.add("opacity-100", "z-20");
             header.classList.remove("opacity-0", "z-10");
             header.style.pointerEvents = "auto";
         }
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     }
+    void header.offsetHeight;
 }
 
 function scrollLeft() {
